@@ -1,0 +1,35 @@
+# ============================================================================
+# REQUIREMENTS.TXT - All Python packages needed for this project
+# ============================================================================
+# What are these?
+# These are all the tools/libraries we import in main.py
+# Run: pip install -r requirements.txt
+# ============================================================================
+
+# FastAPI - The framework for building our API server
+fastapi==0.104.1
+
+# Uvicorn - Server that runs FastAPI
+uvicorn[standard]==0.24.0
+
+# PyJWT - For creating and verifying JWT tokens (login proof)
+PyJWT==2.13.0
+
+# Python-dotenv - For loading secret keys from .env file
+python-dotenv==1.0.0
+
+# Pydantic - For data validation (checking if data is correct format)
+pydantic==2.5.0
+
+# Pydantic settings - Settings management
+pydantic-settings==2.1.0
+
+# CORS - For frontend-backend communication
+fastapi-cors==0.0.6
+
+# Optional: For production server (more powerful than uvicorn)
+# gunicorn==21.2.0
+
+# Optional: For async database operations
+# sqlalchemy==2.0.23
+# asyncpg==0.29.0  # PostgreSQL async driver
