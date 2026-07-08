@@ -121,7 +121,8 @@ fake_athlete_profiles = {}
 
 # Fake videos database
 fake_videos = {}
-
+# Fake athlete profiles database
+fake_athlete_profiles = {}
 # ============================================================================
 # STEP 6: Secret Key for JWT Token (Security)
 # ============================================================================
@@ -409,3 +410,28 @@ async def get_videos(email: str = None):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+    
+# ENDPOINT 9: Create Athlete Profile
+from fastapi import Query
+
+# ENDPOINT 9: Create Athlete Profile
+@app.post("/api/athletes/profile")
+async def create_athlete_profile(profile: dict, email: str = Query("athlete@test.com")):
+    """Creates or updates athlete profile"""
+    fake_athlete_profiles[email] = {
+        **profile,
+        "email": email,
+        "created_at": str(datetime.now())
+    }
+    return {
+        "message": "Athlete profile created successfully",
+        "profile": fake_athlete_profiles[email]
+    }
+
+# ENDPOINT 10: Get Athlete Profile
+@app.get("/api/athletes/profile")
+async def get_athlete_profile(email: str = Query("athlete@test.com")):
+    """Retrieves athlete profile"""
+    if email not in fake_athlete_profiles:
+        raise HTTPException(status_code=404, detail="Profile not found")
+    return fake_athlete_profiles[email]
