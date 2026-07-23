@@ -103,6 +103,7 @@ class VideoUpload(BaseModel):
 # ============================================================================
 # In real world, this would be PostgreSQL. For now, we're using simple storage.
 
+<<<<<<< Updated upstream
 # Fake user database (stores registered users)
 fake_users_db = {
     # Example user already in system
@@ -117,6 +118,16 @@ fake_users_db = {
 }
 
 # Fake athlete profiles database
+=======
+fake_users = {"test@gmail.com": {
+        "email": "test@gmail.com",
+        "password": "test123",
+        "name": "Test User",
+        "role": "athlete",
+        "created_at": str(datetime.now())
+    }
+}
+>>>>>>> Stashed changes
 fake_athlete_profiles = {}
 
 # Fake videos database
