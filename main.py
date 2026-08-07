@@ -103,6 +103,7 @@ class VideoUpload(BaseModel):
 # ============================================================================
 # In real world, this would be PostgreSQL. For now, we're using simple storage.
 
+<<<<<<< Updated upstream
 # Fake user database (stores registered users)
 fake_users_db = {
     # Example user already in system
@@ -117,6 +118,16 @@ fake_users_db = {
 }
 
 # Fake athlete profiles database
+=======
+fake_users = {"test@gmail.com": {
+        "email": "test@gmail.com",
+        "password": "test123",
+        "name": "Test User",
+        "role": "athlete",
+        "created_at": str(datetime.now())
+    }
+}
+>>>>>>> Stashed changes
 fake_athlete_profiles = {}
 
 # Fake videos database
@@ -409,6 +420,7 @@ async def get_videos(email: str = None):
 
 if __name__ == "__main__":
     import uvicorn
+<<<<<<< HEAD
     uvicorn.run(app, host="0.0.0.0", port=8000)
     
 # ENDPOINT 9: Create Athlete Profile
@@ -435,3 +447,6 @@ async def get_athlete_profile(email: str = Query("athlete@test.com")):
     if email not in fake_athlete_profiles:
         raise HTTPException(status_code=404, detail="Profile not found")
     return fake_athlete_profiles[email]
+=======
+    uvicorn.run(app, host="0.0.0.0", port=8001)
+>>>>>>> master
