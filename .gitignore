@@ -2,5 +2,15 @@ venv/
 __pycache__/
 *.pyc
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 node_modules/
 build/
+sports_injury.db
+uploaded_videos/
+reports/
+.DS_Store
+Thumbs.db
+*.log

@@ -27,9 +27,17 @@ pydantic-settings==2.1.0
 # CORS - For frontend-backend communication
 fastapi-cors==0.0.6
 
-# Optional: For production server (more powerful than uvicorn)
-# gunicorn==21.2.0
+# FPDF - For PDF report generation
+fpdf==1.7.2
 
-# Optional: For async database operations
-# sqlalchemy==2.0.23
-# asyncpg==0.29.0  # PostgreSQL async driver
+# Passlib - For password hashing
+passlib[bcrypt]==1.7.4
+
+# Requests - For Google OAuth verification
+requests==2.31.0
+
+# AIOSQLite - For async SQLite database
+aiosqlite==0.19.0
+
+# SQLAlchemy - For database ORM
+sqlalchemy==2.0.23

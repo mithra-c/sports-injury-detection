@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { registerUser } from './apiService';
+import { registerUser, parseApiError } from './apiService';
 import './Auth.css';
 
 function Register({ onSuccess, onToggle }) {
   const [formData, setFormData] = useState({
-    name: '',
+    full_name: '',
     email: '',
     password: '',
-    role: 'athlete'
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,17 +23,17 @@ function Register({ onSuccess, onToggle }) {
     e.preventDefault();
     setError('');
 
-    if (!formData.name || !formData.email || !formData.password) {
-      setError('Please fill in all fields');
+    if (!formData.full_name.trim() || !formData.email.trim() || !formData.password.trim()) {
+      setError('Please fill in all required fields');
       return;
     }
 
     try {
       setLoading(true);
-      await registerUser(formData.name, formData.email, formData.password, formData.role);
+      await registerUser(formData.full_name.trim(), formData.email.trim(), formData.password);
       onToggle();
     } catch (err) {
-      setError(err.message || 'Registration failed');
+      setError(parseApiError(err) || 'Registration failed');
     } finally {
       setLoading(false);
     }
@@ -43,23 +42,24 @@ function Register({ onSuccess, onToggle }) {
   return (
     <div className="auth-container">
       <div className="auth-header">
-        <h2>Register</h2>
-        <p>Create a new account</p>
+        <h2>Create Account</h2>
+        <p>Join Sports Injury Detection</p>
       </div>
 
       {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit} className="auth-form">
         <div className="form-group">
-          <label htmlFor="name">Full Name</label>
+          <label htmlFor="full_name">Full Name</label>
           <input
-            id="name"
+            id="full_name"
             type="text"
             placeholder="John Athlete"
-            name="name"
-            value={formData.name}
+            name="full_name"
+            value={formData.full_name}
             onChange={handleChange}
             disabled={loading}
+            autoComplete="name"
           />
         </div>
 
@@ -73,23 +73,8 @@ function Register({ onSuccess, onToggle }) {
             value={formData.email}
             onChange={handleChange}
             disabled={loading}
+            autoComplete="email"
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="role">Role</label>
-          <select
-            id="role"
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            disabled={loading}
-          >
-            <option value="athlete">Athlete</option>
-            <option value="coach">Coach</option>
-            <option value="physiotherapist">Physiotherapist</option>
-            <option value="admin">Admin</option>
-          </select>
         </div>
 
         <div className="form-group">
@@ -97,16 +82,17 @@ function Register({ onSuccess, onToggle }) {
           <input
             id="password"
             type="password"
-            placeholder="Enter password"
+            placeholder="Create a password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             disabled={loading}
+            autoComplete="new-password"
           />
         </div>
 
         <button type="submit" className="auth-button" disabled={loading}>
-          {loading ? 'Registering...' : 'Register'}
+          {loading ? 'Creating account...' : 'Register'}
         </button>
       </form>
 
